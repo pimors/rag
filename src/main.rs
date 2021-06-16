@@ -1,5 +1,18 @@
 use ndarray::prelude::*;
 
+// currently only squares 1d arrays
+fn square(p_x: &Array1<f32>) -> Array1<f32> {
+  return p_x.mapv(|p_x: f32| p_x.powi(2));
+}
+
+//fn maximum(p_x: &Array1<f32>, p_y: &Array1<f32>) -> Array1<f32> {
+//  for i in p_x.iter() {
+//    print!("i-1: {}\n", p_y[*i as i32])
+//  }
+//
+//  return p_x * p_y;
+//}
+
 fn main() {
   // testing some stuff
   let a = array![
@@ -16,8 +29,14 @@ fn main() {
   println!("X + Y: {}", &x+&y);
   println!("X * Y: {}", &x*&y);
   println!("X dot Y: {}", &x.dot(&y));
+  
+  // test square
+  println!("square x: {}", square(&x));
+  //println!("square x: {}", square(x));
+  // test max
+//  println!("maximum x y: {}", maximum(&x,&y));
 
-  println!{"\n"}
+  println!{"\n"};
 
   let b = array![
     [[1.,2.],[3.,4.]]
@@ -29,7 +48,7 @@ fn main() {
   println!("sum b axis 1:\n {}", &b.sum_axis(Axis(1)));
   println!("sum b axis 2:\n {}", &b.sum_axis(Axis(2)));
 
-  println!{"\n"}
+  println!{"\n"};
 
   // add 1D array to last axis
   let c = array![[1.,2.,3.,],[4.,5.,6.]];
@@ -37,7 +56,7 @@ fn main() {
 
   println!("c + d: {}", c+d);
   
-  println!{"\n"}
+  println!{"\n"};
 
   assert_eq!(a.ndim(), 2);
   assert_eq!(a.len(), 6);
